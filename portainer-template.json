@@ -4,8 +4,8 @@
     {
       "type": 3,
       "title": "Project Zomboid Dedicated Server",
-      "description": "Production-ready Project Zomboid dedicated server with auto-updates, Steam Workshop support, and graceful saves.",
-      "note": "Initial startup downloads game assets via SteamCMD (2-5 min). Update repository.url with your Git repo URL before importing.",
+      "description": "Project Zomboid server with SteamCMD auto-updates, mod support, and safe shutdown saves.",
+      "note": "First startup pulls ~4 GB of game files via SteamCMD (takes a few minutes).",
       "categories": [
         "Game Servers"
       ],

@@ -1,5 +1,9 @@
 # Project Zomboid Game and Save Data
-data/
+data/*
+!data/server/
+!data/server/.gitkeep
+!data/install/
+!data/install/.gitkeep
 
 # Environment files with passwords
 .env

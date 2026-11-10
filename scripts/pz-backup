@@ -10,7 +10,7 @@ mkdir -p "$BACKUP_DIR"
 echo "[PZ Backup] Sending save command to game server..."
 if [ -p "$CONSOLE_PIPE" ]; then
     echo "save" > "$CONSOLE_PIPE" 2>/dev/null || true
-    sleep 2
+    sleep 5
 fi
 
 echo "[PZ Backup] Compressing saves, database, and configurations..."
@@ -28,7 +28,8 @@ if [ -z "$TARGETS" ]; then
     exit 0
 fi
 
-tar -czf "$BACKUP_FILE" $TARGETS
+# Archive with tolerance for actively appended server logs
+tar -czf "$BACKUP_FILE" $TARGETS 2>/dev/null || tar -czf "$BACKUP_FILE" $TARGETS
 
 echo "[PZ Backup] Successfully created: ${BACKUP_FILE}"
 echo "[PZ Backup] Accessible on host at: ./data/server/Backups/pz_backup_${TIMESTAMP}.tar.gz"
