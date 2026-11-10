@@ -19,12 +19,16 @@ services:
         required: false
     volumes:
       # Server saves, configuration, player database, logs
-      - ./data/server:/home/steam/Zomboid
+      - pz-data:/home/steam/Zomboid
       # Cached game binaries & Steam installation (makes updates faster)
-      - ./data/install:/home/steam/pz-server
+      - pz-install:/home/steam/pz-server
     healthcheck:
       test: ["CMD-SHELL", "pgrep -i -f 'projectzomboid' > /dev/null || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 4m
+
+volumes:
+  pz-data:
+  pz-install:
