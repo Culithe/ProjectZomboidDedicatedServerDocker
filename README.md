@@ -4,14 +4,17 @@ A Docker container to easily host and manage Project Zomboid dedicated servers w
 
 ## Quick Start
 
-### 1. Configure and start
+### 1. Clone repository and start
 
 ```bash
+git clone https://github.com/Culithe/ProjectZomboid.git
+cd ProjectZomboid
+
 # Optional: copy configuration template to customize settings
 cp .env.example .env
 
-# Start the server
-docker compose up -d
+# Build and start the container
+docker compose up -d --build
 ```
 
 On first run, SteamCMD downloads the game server files (~3-5 GB). This takes a few minutes depending on your connection.
@@ -37,17 +40,25 @@ In Project Zomboid, go to **Join** and enter your server IP:
 - Username: your chosen username (use `admin` for administrator access)
 - Password: your chosen password (or `ADMIN_PASSWORD` from `.env`)
 
-## Portainer
+## Portainer Deployment
 
-To deploy via Portainer Stacks:
+### Method A: Deploy via Portainer Git Stack (Recommended)
 
 1. In Portainer, go to **Stacks** > **Add stack**.
-2. Name the stack (e.g. `pz-server`).
-3. Select **Web editor** and paste the contents of `docker-compose.yml`.
-4. (Optional) Set environment variables (such as `ADMIN_PASSWORD` or `SERVER_RAM_MAX`).
-5. Click **Deploy the stack**.
+2. Enter a name (e.g. `pz-server`).
+3. Select **Repository** build method.
+4. Set **Repository URL**: `https://github.com/Culithe/ProjectZomboid`
+5. Set **Compose path**: `docker-compose.yml`
+6. (Optional) Add your environment variables (e.g., `ADMIN_PASSWORD`, `SERVER_RAM_MAX`).
+7. Click **Deploy the stack**. Portainer automatically clones the repository, builds the Docker image, and starts the server.
 
-If using `portainer-template.json`, update `repository.url` inside the file to your repository URL before importing it as a custom App Template.
+### Method B: Deploy via Portainer App Template
+
+1. In Portainer, navigate to **Settings** > **App Templates**.
+2. Set the custom template URL:
+   `https://raw.githubusercontent.com/Culithe/ProjectZomboid/main/portainer-template.json`
+3. Save settings and open **App Templates** in the sidebar.
+4. Select **Project Zomboid Dedicated Server**, configure your variables in the UI form, and click **Deploy the stack**.
 
 ## Linux Host Permissions
 
