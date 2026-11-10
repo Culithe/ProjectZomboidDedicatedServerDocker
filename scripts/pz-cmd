@@ -1,0 +1,20 @@
+#!/bin/bash
+# pz-cmd: Send a command into the Project Zomboid live console
+CONSOLE_PIPE="/tmp/pz_console"
+
+if [ -z "$*" ]; then
+    echo "Usage: pz-cmd <server_command>"
+    echo "Examples:"
+    echo "  pz-cmd players"
+    echo "  pz-cmd save"
+    echo "  pz-cmd 'servermsg \"Hello survivors!\"'"
+    exit 1
+fi
+
+if [ ! -p "$CONSOLE_PIPE" ]; then
+    echo "[ERROR] Project Zomboid console pipe is not active. Is the server running?"
+    exit 1
+fi
+
+printf '%s\n' "$*" > "$CONSOLE_PIPE"
+echo "[PZ] Executed command: $*"

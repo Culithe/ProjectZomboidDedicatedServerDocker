@@ -1,0 +1,30 @@
+services:
+  pz-server:
+    build: .
+    image: project-zomboid-server:latest
+    container_name: project-zomboid-server
+    restart: unless-stopped
+    stop_grace_period: 60s
+    stdin_open: true
+    tty: true
+    ports:
+      # Game connection port (UDP)
+      - "${SERVER_PORT:-16261}:${SERVER_PORT:-16261}/udp"
+      # Steam query port (UDP)
+      - "${STEAM_PORT:-16262}:${STEAM_PORT:-16262}/udp"
+      # RCON admin console port (TCP)
+      - "${RCON_PORT:-27015}:${RCON_PORT:-27015}/tcp"
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      # Server saves, configuration, player database, logs
+      - ./data/server:/home/steam/Zomboid
+      # Cached game binaries & Steam installation (makes updates faster)
+      - ./data/install:/home/steam/pz-server
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -i -f 'projectzomboid' > /dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 4m

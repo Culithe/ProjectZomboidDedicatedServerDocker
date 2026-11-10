@@ -1,0 +1,9 @@
+# Project Zomboid Game and Save Data
+data/
+
+# Environment files with passwords
+.env
+
+# Docker and OS files
+.DS_Store
+Thumbs.db

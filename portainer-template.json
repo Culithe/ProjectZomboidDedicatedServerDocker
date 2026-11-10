@@ -1,0 +1,70 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "type": 3,
+      "title": "Project Zomboid Dedicated Server",
+      "description": "Production-ready Project Zomboid dedicated server with auto-updates, Steam Workshop support, and graceful saves.",
+      "note": "Initial startup downloads game assets via SteamCMD (2-5 min). Update repository.url with your Git repo URL before importing.",
+      "categories": [
+        "Game Servers"
+      ],
+      "platform": "linux",
+      "logo": "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/project-zomboid.png",
+      "repository": {
+        "url": "https://github.com/your-username/ProjectZomboid",
+        "stackfile": "docker-compose.yml"
+      },
+      "env": [
+        {
+          "name": "ADMIN_PASSWORD",
+          "label": "Admin Password",
+          "description": "Password for the in-game admin account (must not be left default).",
+          "default": "ChangeMe123!"
+        },
+        {
+          "name": "SERVER_NAME",
+          "label": "Server Profile Name",
+          "description": "Used for naming save folder and configuration files.",
+          "default": "pzserver"
+        },
+        {
+          "name": "SERVER_PUBLIC_NAME",
+          "label": "Public Server Name",
+          "description": "Server name visible in the in-game server browser.",
+          "default": "My Project Zomboid Server"
+        },
+        {
+          "name": "SERVER_RAM_MAX",
+          "label": "Max RAM Allocation",
+          "description": "Maximum memory ceiling for the server (e.g. 4g, 8g, 12g, 16g).",
+          "default": "8g"
+        },
+        {
+          "name": "STEAM_BRANCH",
+          "label": "Steam Branch",
+          "description": "public for stable (Build 41) or b42_beta / unstable for experimental.",
+          "default": "public"
+        },
+        {
+          "name": "AUTO_UPDATE",
+          "label": "Auto Update",
+          "description": "Update via SteamCMD every time container restarts.",
+          "default": "true"
+        },
+        {
+          "name": "PVP",
+          "label": "Enable PvP",
+          "description": "Allow players to harm each other.",
+          "default": "true"
+        },
+        {
+          "name": "PAUSE_EMPTY",
+          "label": "Pause When Empty",
+          "description": "Freezes world progression when 0 players are connected.",
+          "default": "true"
+        }
+      ]
+    }
+  ]
+}
